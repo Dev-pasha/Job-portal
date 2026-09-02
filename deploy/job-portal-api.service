@@ -1,0 +1,40 @@
+# systemd unit for the job portal API.
+# Install to /etc/systemd/system/job-portal-api.service
+
+[Unit]
+Description=Job Portal API
+Documentation=file:///opt/job-portal/README.md
+After=network.target postgresql.service
+Wants=postgresql.service
+
+[Service]
+Type=simple
+User=jobportal
+Group=jobportal
+WorkingDirectory=/opt/job-portal/server
+ExecStart=/usr/bin/node src/index.js
+EnvironmentFile=/opt/job-portal/server/.env
+
+Restart=always
+RestartSec=5
+
+# Restart on crash, but give up if it is crash-looping so the logs stay readable.
+StartLimitBurst=5
+StartLimitIntervalSec=60
+
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=job-portal-api
+
+# The service only ever needs to write to its own data directory.
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/job-portal/server/data
+ProtectKernelTunables=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+
+[Install]
+WantedBy=multi-user.target

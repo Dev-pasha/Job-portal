@@ -19,7 +19,7 @@ async function request(path, { method = 'GET', body, form, admin = false } = {})
 
   if (res.status === 401 && admin) {
     auth.clear();
-    window.location.hash = '#/admin';
+    window.location.assign('/admin');
   }
 
   if (res.status === 204) return null;
