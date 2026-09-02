@@ -1,0 +1,9 @@
+# ads.txt — https://iabtechlab.com/ads-txt/
+#
+# Ad networks require this file at the root of the domain that serves your ads,
+# to prove you authorised them to sell your inventory.
+#
+# Replace the line below with the exact one Adsterra gives you in your publisher
+# dashboard. The number is your own publisher ID, not the placeholder here.
+#
+# adsterra.com, PUB-ID-GOES-HERE, DIRECT
